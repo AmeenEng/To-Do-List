@@ -92,3 +92,85 @@ button:hover {
         padding: 8px;
     }
 }
+
+ul {
+    list-style: none;
+    padding: 0;
+    margin-top: 20px;
+    width: 100%;
+}
+
+li {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 12px 15px;
+    margin-bottom: 10px;
+    background-color: #f9f9f9;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+    transition: background-color 0.3s, transform 0.2s;
+}
+
+li:hover {
+    background-color: #f0f9f3;
+    transform: translateY(-2px);
+}
+
+li strong {
+    flex: 1;
+    font-size: 16px;
+    color: #333;
+}
+
+li.completed strong {
+    text-decoration: line-through;
+    color: #999;
+}
+
+li.completed .actions a:first-child {
+    opacity: 0.5;
+    text-decoration: line-through;
+    pointer-events: none;
+    cursor: default;
+}
+
+li.completed .actions a:last-child {
+    opacity: 1;
+    text-decoration: none;
+    pointer-events: auto;
+    cursor: pointer;
+}
+
+.actions {
+    display: flex;
+    gap: 10px;
+}
+
+.actions a {
+    text-decoration: none;
+    padding: 6px 12px;
+    border-radius: 6px;
+    font-size: 14px;
+    font-weight: bold;
+    color: white;
+    transition: background-color 0.3s, transform 0.2s;
+    display: inline-block;
+    text-align: center;
+}
+
+.actions a:first-child {
+    background-color: #46ce63;
+}
+
+.actions a:first-child:hover {
+    background-color: #2f9245;
+}
+
+.actions a:last-child {
+    background-color: #e74c3c;
+}
+
+.actions a:last-child:hover {
+    background-color: #c0392b;
+}

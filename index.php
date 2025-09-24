@@ -8,7 +8,20 @@ if(isset($_POST["addtask"]) && isset($_POST["task"])) {
     exit();
 }
 
-$result = $conn->query("SELECT * FROM tasks ORDER BY id DESC");
+$result = $conn->query("SELECT * FROM tasks ORDER BY id");
+
+if(isset($_GET["complete"])) {
+    $id = $_GET["complete"];
+    $conn->query("UPDATE tasks SET 	status = 1 WHERE id = $id");
+    header("Location: index.php");
+    exit();
+}
+if(isset($_GET["Delete"])) {
+    $id = $_GET["Delete"];
+    $conn->query("DELETE FROM tasks WHERE id = $id");
+    header("Location: index.php");
+    exit();
+}
 ?>
 
 <!DOCTYPE html>
@@ -28,8 +41,12 @@ $result = $conn->query("SELECT * FROM tasks ORDER BY id DESC");
         </form>
         <ul>
             <?php while($row = $result->fetch(PDO::FETCH_ASSOC)): ?>
-                <li>
-                    <?php echo htmlspecialchars($row["task"]);?>
+                <li class="<?php echo $row["status"] ? 'completed' : 'not-completed'; ?>">
+                    <strong><?php echo htmlspecialchars($row["task"]);?></strong>
+                    <div class="actions">
+                        <a href="index.php?complete=<?php echo $row['id']; ?>">Complete</a>
+                        <a href="index.php?Delete=<?php echo $row['id']; ?>" onclick="return confirm('Are you sure you want to delete this task?')">Delete</a>
+                    </div>
                 </li>
             <?php endwhile; ?>
         </ul>
